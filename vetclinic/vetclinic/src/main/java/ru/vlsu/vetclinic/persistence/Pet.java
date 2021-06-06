@@ -10,21 +10,22 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private Integer clientid;
 
-    @Column(nullable = false)
     private Integer age;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_type")
+    private PetType type;
 
     //Конструктор
     public Pet() {
     }
 
     //Геттеры сеттеры
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -40,7 +41,7 @@ public class Pet {
         this.name = name;
     }
 
-    public int getClientid() {
+    public Integer getClientid() {
         return clientid;
     }
 
@@ -48,11 +49,20 @@ public class Pet {
         this.clientid = clientid;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
+
+    public PetType getType() {
+        return type;
+    }
+
+    public void setType(PetType type) {
+        this.type = type;
+    }
+
 }
