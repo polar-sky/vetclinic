@@ -12,37 +12,36 @@
 </head>
 <body>
 
-<div class="container">
-    <form method="post" action="#">
-        <div class="input-group mb-3 mt-3">
-            <input type="text" class="form-control" placeholder="Добавить новое животное(не работает и реализовывается не так)" aria-label="Название новой покупки" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Добавить</button>
-            </div>
-        </div>
-    </form>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Имя</th>
-            <th scope="col">id хозяина</th>
-            <th scope="col">Возраст</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="item : ${pets}">
-            <th scope="row" th:text="${item.id}"></th>
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.clientid}"></td>
-            <td th:text="${item.age}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container text-center">
+    <h1>Animals & CO</h1>
+    <div>
+        <a class="h2" th:href="@{/newpet}">Добавить животное</a>
+    </div>
+    <div>
+        <a class="h2" th:href="@{/types}">Виды животных</a>
+    </div>
 </div>
 
-
+<div class="container">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Возраст (полных лет)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pet : ${pets}">
+        <th scope="row" th:text="${pet.getId()}"></th>
+        <td th:text="${pet.getName()}"></td>
+        <td th:text="${pet.getType()}"></td>
+        <td th:text="${pet.getAge()}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
