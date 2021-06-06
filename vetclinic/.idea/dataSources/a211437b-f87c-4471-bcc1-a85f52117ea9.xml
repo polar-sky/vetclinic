@@ -758,312 +758,270 @@ SELECT|sys.sys_config
     <table id="235" parent="7" name="client"/>
     <table id="236" parent="7" name="entry"/>
     <table id="237" parent="7" name="pet"/>
-    <table id="238" parent="7" name="pettype"/>
-    <table id="239" parent="7" name="reply"/>
-    <table id="240" parent="7" name="request"/>
-    <table id="241" parent="7" name="schedule"/>
-    <table id="242" parent="7" name="vet"/>
-    <column id="243" parent="234" name="id">
+    <table id="238" parent="7" name="reply"/>
+    <table id="239" parent="7" name="request"/>
+    <table id="240" parent="7" name="schedule"/>
+    <table id="241" parent="7" name="vet"/>
+    <column id="242" parent="234" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="244" parent="234" name="petid">
+    <column id="243" parent="234" name="petid">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="245" parent="234" name="typeAppt">
+    <column id="244" parent="234" name="typeAppt">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="246" parent="234" name="description">
+    <column id="245" parent="234" name="description">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="247" parent="234" name="diagnose">
+    <column id="246" parent="234" name="diagnose">
       <Position>5</Position>
       <DataType>varchar(128)|0s</DataType>
     </column>
-    <column id="248" parent="234" name="entryid">
+    <column id="247" parent="234" name="entryid">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <index id="249" parent="234" name="apptpet_idx">
+    <index id="248" parent="234" name="apptpet_idx">
       <ColNames>petid</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="250" parent="234" name="apptentry_idx">
+    <index id="249" parent="234" name="apptentry_idx">
       <ColNames>entryid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="251" parent="234" name="PRIMARY">
+    <key id="250" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="252" parent="234" name="apptpet">
+    <foreign-key id="251" parent="234" name="apptpet">
       <ColNames>petid</ColNames>
       <RefTableName>pet</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="253" parent="234" name="apptentry">
+    <foreign-key id="252" parent="234" name="apptentry">
       <ColNames>entryid</ColNames>
       <RefTableName>entry</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="254" parent="235" name="id">
+    <column id="253" parent="235" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="255" parent="235" name="full_name">
+    <column id="254" parent="235" name="email">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="256" parent="235" name="email">
+    <column id="255" parent="235" name="phone">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="257" parent="235" name="phone">
+    <column id="256" parent="235" name="address">
       <Position>4</Position>
-      <DataType>varchar(45)|0s</DataType>
-    </column>
-    <column id="258" parent="235" name="address">
-      <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="259" parent="235" name="PRIMARY">
+    <key id="257" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="260" parent="236" name="id">
+    <column id="258" parent="236" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="261" parent="236" name="date">
+    <column id="259" parent="236" name="date">
       <Position>2</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="262" parent="236" name="vetid">
+    <column id="260" parent="236" name="vetid">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="263" parent="236" name="clientid">
+    <column id="261" parent="236" name="clientid">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="264" parent="236" name="status">
+    <column id="262" parent="236" name="status">
       <Position>5</Position>
       <DataType>tinyint(4)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="265" parent="236" name="vet_idx">
+    <index id="263" parent="236" name="vet_idx">
       <ColNames>vetid</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="266" parent="236" name="client_idx">
+    <index id="264" parent="236" name="client_idx">
       <ColNames>clientid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="267" parent="236" name="PRIMARY">
+    <key id="265" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="268" parent="236" name="vetentry">
+    <foreign-key id="266" parent="236" name="vetentry">
       <ColNames>vetid</ColNames>
       <RefTableName>vet</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="269" parent="236" name="cliententry">
+    <foreign-key id="267" parent="236" name="cliententry">
       <ColNames>clientid</ColNames>
       <RefTableName>client</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="270" parent="237" name="id">
+    <column id="268" parent="237" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="271" parent="237" name="name">
+    <column id="269" parent="237" name="name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="272" parent="237" name="clientid">
+    <column id="270" parent="237" name="clientid">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="273" parent="237" name="age">
+    <column id="271" parent="237" name="age">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="274" parent="237" name="id_type">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="275" parent="237" name="clientpet_idx">
+    <index id="272" parent="237" name="clientpet_idx">
       <ColNames>clientid</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="276" parent="237" name="pet_typepet_idx">
-      <ColNames>id_type</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="277" parent="237" name="PRIMARY">
+    <key id="273" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="278" parent="237" name="clientpet">
+    <foreign-key id="274" parent="237" name="clientpet">
       <ColNames>clientid</ColNames>
       <RefTableName>client</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="279" parent="237" name="pet_typepet">
-      <ColNames>id_type</ColNames>
-      <RefTableName>pettype</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="280" parent="238" name="id">
+    <column id="275" parent="238" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="281" parent="238" name="typeName">
-      <Position>2</Position>
-      <DataType>varchar(45)|0s</DataType>
-    </column>
-    <key id="282" parent="238" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="283" parent="239" name="id">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="284" parent="239" name="requestid">
+    <column id="276" parent="238" name="requestid">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="285" parent="239" name="text">
+    <column id="277" parent="238" name="text">
       <Position>3</Position>
       <DataType>longtext|0s</DataType>
     </column>
-    <column id="286" parent="239" name="date">
+    <column id="278" parent="238" name="date">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="287" parent="239" name="replypequest_idx">
+    <index id="279" parent="238" name="replypequest_idx">
       <ColNames>requestid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="288" parent="239" name="PRIMARY">
+    <key id="280" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="289" parent="239" name="replypequest">
+    <foreign-key id="281" parent="238" name="replypequest">
       <ColNames>requestid</ColNames>
       <RefTableName>request</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="290" parent="240" name="id">
+    <column id="282" parent="239" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="291" parent="240" name="clientid">
+    <column id="283" parent="239" name="clientid">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="292" parent="240" name="date">
+    <column id="284" parent="239" name="date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="293" parent="240" name="text">
+    <column id="285" parent="239" name="text">
       <Position>4</Position>
       <DataType>longtext|0s</DataType>
     </column>
-    <index id="294" parent="240" name="requestclient_idx">
+    <index id="286" parent="239" name="requestclient_idx">
       <ColNames>clientid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="295" parent="240" name="PRIMARY">
+    <key id="287" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="296" parent="240" name="requestclient">
+    <foreign-key id="288" parent="239" name="requestclient">
       <ColNames>clientid</ColNames>
       <RefTableName>client</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="297" parent="241" name="id">
+    <column id="289" parent="240" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="298" parent="241" name="vetid">
+    <column id="290" parent="240" name="vetid">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="299" parent="241" name="date">
+    <column id="291" parent="240" name="date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="300" parent="241" name="id_idx">
+    <index id="292" parent="240" name="id_idx">
       <ColNames>vetid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="301" parent="241" name="PRIMARY">
+    <key id="293" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="302" parent="241" name="vetschedule">
+    <foreign-key id="294" parent="240" name="vetschedule">
       <ColNames>vetid</ColNames>
       <RefTableName>vet</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="303" parent="242" name="id">
+    <column id="295" parent="241" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="304" parent="242" name="full_name">
+    <column id="296" parent="241" name="qualification">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="305" parent="242" name="qualification">
+    <column id="297" parent="241" name="specialization">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="306" parent="242" name="specialization">
-      <Position>4</Position>
-      <DataType>varchar(45)|0s</DataType>
-    </column>
-    <key id="307" parent="242" name="PRIMARY">
+    <key id="298" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
