@@ -19,6 +19,7 @@
 
 <div class="container text-center">
 
+
     <form th:action="@{/newpet}" th:object="${pet}" method="post">
         <div class="m-3">
             <div class="form-group row">
@@ -51,9 +52,9 @@
            <div class="form-group row">
                 <label class="col-form-label col-sm-4">Вид:</label>
                 <div class="col-sm-8">
-                    <select th:field="*{type_name}" class="form-control" required>
+                    <select th:field="*{type}" class="form-control" required>
                         <th:block th:each="ptype : ${types}">
-                            <option  th:text="${ptype.getType()}" th:value="${ptype.getId()}"></option>
+                            <option  th:text="${ptype.getType()}" th:value="${{ptype}}"></option>
                         </th:block>
                     </select>
                 </div>

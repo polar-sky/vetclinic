@@ -35,7 +35,7 @@
     <tbody>
     <tr th:each="pet : ${pets}">
         <th scope="row" th:text="${pet.getId()}"></th>
-        <td th:text="${pet.getName()}"></td>
+        <td th:text="${pet.getClientid()}"></td>
         <td th:text="${pet.getType()}"></td>
         <td th:text="${pet.getAge()}"></td>
     </tr>
