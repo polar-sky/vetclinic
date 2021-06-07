@@ -42,6 +42,9 @@
         <td>
             <a th:href="@{'/pets/edit/'+${pet.getId()}}">Изменить</a>
         </td>
+        <td>
+            <a th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
+        </td>
     </tr>
     </tbody>
 </table>

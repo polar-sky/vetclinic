@@ -68,4 +68,10 @@ public class PetController {
         model.addAttribute("types", types);
         return "newpet";
     }
+
+    @GetMapping("/pets/delete/{id}")
+    public String showDeletePet(@PathVariable("id") Integer id, Model model){
+        petRepo.deleteById(id);
+        return "redirect:/";
+    }
 }
