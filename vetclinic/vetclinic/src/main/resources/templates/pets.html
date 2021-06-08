@@ -30,14 +30,21 @@
         <th scope="col">Имя</th>
         <th scope="col">Тип</th>
         <th scope="col">Возраст (полных лет)</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="pet : ${pets}">
         <th scope="row" th:text="${pet.getId()}"></th>
-        <td th:text="${pet.getClientid()}"></td>
-        <td th:text="${pet.getType()}"></td>
+        <td th:text="${pet.getName()}"></td>
+        <td th:text="${pet.getType().type}"></td>
         <td th:text="${pet.getAge()}"></td>
+        <td>
+            <a th:href="@{'/pets/edit/'+${pet.getId()}}">Изменить</a>
+        </td>
+        <td>
+            <a th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
+        </td>
     </tr>
     </tbody>
 </table>
