@@ -1,6 +1,7 @@
 package ru.vlsu.vetclinic.service;
 
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 public class UserRepr {
@@ -14,6 +15,15 @@ public class UserRepr {
 
     @NotBlank
     private String repeatPassword;
+
+    @NotBlank
+    private String fullName;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
 
     public Long getId() {
         return id;
@@ -45,5 +55,37 @@ public class UserRepr {
 
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
