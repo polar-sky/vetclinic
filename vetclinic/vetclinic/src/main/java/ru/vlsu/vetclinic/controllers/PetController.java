@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.vlsu.vetclinic.persistence.Pet;
-import ru.vlsu.vetclinic.persistence.PetRepository;
-import ru.vlsu.vetclinic.persistence.PetTypeRepository;
-import ru.vlsu.vetclinic.persistence.PetType;
+import ru.vlsu.vetclinic.persistence.*;
 
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -17,22 +15,24 @@ public class PetController {
 
     private PetRepository petRepo;
     private PetTypeRepository typeRepo;
+    private UserRepository userRepo;
 
     //autowired - при создании данного класса спринг будет искать есть ли класс, реализующий интерфейс petrepository и передаст этот класс в метод
     @Autowired
-    public PetController(PetRepository petRepository, PetTypeRepository petTypeRepository){
+    public PetController(PetRepository petRepository, PetTypeRepository petTypeRepository, UserRepository userRepository){
         this.petRepo = petRepository;
         this.typeRepo= petTypeRepository;
+        this.userRepo = userRepository;
 
     }
 
     //*ЖИВОТНЫЕ*
     //метод для возврата странички списка животных
     @GetMapping("/")
-    public String petPage(Model model){
+    public String petPage(Model model, Principal principal){
 
         List<Pet> pets;
-        pets = petRepo.findAll();
+        pets = petRepo.findByClientidUsername(principal.getName());
         model.addAttribute("pets", pets);
         return "pets";
     }
@@ -57,7 +57,9 @@ public class PetController {
     }
 
     @PostMapping("/save")
-    public String savePet(Pet pet){
+    public String savePet(Pet pet, Principal principal){
+        User user = userRepo.findByUsername(principal.getName()).get();
+        pet.setClientid(user);
         petRepo.save(pet);
         return "redirect:/";
     }

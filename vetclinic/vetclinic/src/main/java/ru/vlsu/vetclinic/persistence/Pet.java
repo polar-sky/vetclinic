@@ -12,7 +12,9 @@ public class Pet {
 
     private String name;
 
-    private Integer clientid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="clientid")
+    private User clientid;
 
     private Integer age;
 
@@ -41,11 +43,11 @@ public class Pet {
         this.name = name;
     }
 
-    public Integer getClientid() {
+    public User getClientid() {
         return clientid;
     }
 
-    public void setClientid(int clientid) {
+    public void setClientid(User clientid) {
         this.clientid = clientid;
     }
 
