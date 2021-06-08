@@ -9,6 +9,7 @@ import ru.vlsu.vetclinic.persistence.PetRepository;
 import ru.vlsu.vetclinic.persistence.PetTypeRepository;
 import ru.vlsu.vetclinic.persistence.PetType;
 
+
 import java.util.List;
 
 @Controller
@@ -22,6 +23,7 @@ public class PetController {
     public PetController(PetRepository petRepository, PetTypeRepository petTypeRepository){
         this.petRepo = petRepository;
         this.typeRepo= petTypeRepository;
+
     }
 
     //*ЖИВОТНЫЕ*
