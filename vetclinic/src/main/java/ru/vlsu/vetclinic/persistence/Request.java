@@ -17,9 +17,9 @@ public class Request {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="statusid")
-    private Status statusid;
+    private Status status;
 
-    private Date date;
+    private String date;
 
     private String text;
 
@@ -42,19 +42,19 @@ public class Request {
         this.clientid = clientid;
     }
 
-    public Status getStatusid() {
-        return statusid;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatusid(Status statusid) {
-        this.statusid = statusid;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

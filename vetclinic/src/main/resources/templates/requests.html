@@ -35,7 +35,7 @@
             <td th:text="${request.getClientid().fullName}"></td>
             <td th:text="${request.getDate()}"></td>
             <td th:text="${request.getText()}"></td>
-            <td th:text="${request.getStatusid().status}"></td>
+            <td th:text="${request.getStatus().status}"></td>
             <td>
                 <a th:href="@{'/request/edit/'+${request.getId()}}">Изменить</a>
             </td>
