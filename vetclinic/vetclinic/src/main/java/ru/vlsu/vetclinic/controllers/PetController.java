@@ -28,23 +28,13 @@ public class PetController {
 
     //*ЖИВОТНЫЕ*
     //метод для возврата странички списка животных
-    @GetMapping("/")
+    @GetMapping("/pet")
     public String petPage(Model model, Principal principal){
 
         List<Pet> pets;
         pets = petRepo.findByClientidUsername(principal.getName());
         model.addAttribute("pets", pets);
         return "pets";
-    }
-
-    //метод для возврата странички видов животных *по приколу чтобы понять в чем проблема
-    @GetMapping("/types")
-    public String typePage(Model model){
-
-        List<PetType> types;
-        types = typeRepo.findAll();
-        model.addAttribute("types", types);
-        return "types";
     }
 
     @GetMapping("/newpet")
@@ -61,7 +51,7 @@ public class PetController {
         User user = userRepo.findByUsername(principal.getName()).get();
         pet.setClientid(user);
         petRepo.save(pet);
-        return "redirect:/";
+        return "redirect:/pet";
     }
 
     @GetMapping("/pets/edit/{id}")
@@ -76,6 +66,6 @@ public class PetController {
     @GetMapping("/pets/delete/{id}")
     public String showDeletePet(@PathVariable("id") Integer id, Model model){
         petRepo.deleteById(id);
-        return "redirect:/";
+        return "redirect:/pet";
     }
 }
