@@ -30,11 +30,13 @@ public class VetController {
 
     //*ВРАЧИ*
     //метод для возврата странички списка врачей
-    @GetMapping("/")
+    //опять изменила маппинг. врачи по другой ссылке отображаются
+    @GetMapping("/vets")
     public String vetPage(Model model, Principal principal){
 
         List<Vet> vets;
-        vets = vetRepo.getFull_name();
+        //вывод всех врачей.
+        vets = vetRepo.findAll();
         model.addAttribute("vets", vets);
         return "vets";
     }

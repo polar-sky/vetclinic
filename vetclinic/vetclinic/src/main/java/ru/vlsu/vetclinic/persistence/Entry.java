@@ -1,6 +1,8 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+//импортировала тип данных date
+import java.util.Date;
 
 @Entity
 @Table(name = "entry")
@@ -20,7 +22,8 @@ public class Entry {
     @JoinColumn(name="clientid")
     private User clientid;
 
-    private byte status;
+    //изменила byte на int
+    private int status;
 
     //Конструктор
     public Entry() {
@@ -59,7 +62,8 @@ public class Entry {
         this.vetid = vetid;
     }
 
-    public byte getStatus() {
+    //изменила byte на int
+    public int getStatus() {
         return status;
     }
 

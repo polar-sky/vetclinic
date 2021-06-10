@@ -30,7 +30,8 @@ public class EntryController {
 
     //*ЗАЯВКИ*
     //метод для возврата странички списка заявок
-    @GetMapping("/")
+    //изменила маппинг, чтобы записи выводились на страничку /entries, а не на index
+    @GetMapping("/entries")
     public String entryPage(Model model, Principal principal){
 
         List<Entry> entries;
@@ -40,9 +41,10 @@ public class EntryController {
     }
 
 
+    //добавила принципалы, изменила название метода(смотри SheduleRepository)
     @GetMapping("/newentry")
-    public String createEntry(Model model){
-        List<Schedule> schedule = scheduleRepo.findByVetid(principal.getId()); // КАК ЭТО РЕАЛИЗОВАТЬ
+    public String createEntry(Model model, Principal principal){
+        List<Schedule> schedule = scheduleRepo.findByVetidFull_name(principal.getName()); // КАК ЭТО РЕАЛИЗОВАТЬ
         Entry entry = new Entry();
         model.addAttribute("entry", entry);
         model.addAttribute("schedule", schedule);

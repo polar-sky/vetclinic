@@ -1,6 +1,8 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+//добавла тип данных date
+import java.util.Date;
 
 @Entity
 @Table(name = "schedule")
