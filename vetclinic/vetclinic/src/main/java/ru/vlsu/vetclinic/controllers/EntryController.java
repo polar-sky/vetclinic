@@ -44,7 +44,7 @@ public class EntryController {
     //добавила принципалы, изменила название метода(смотри SheduleRepository)
     @GetMapping("/newentry")
     public String createEntry(Model model, Principal principal){
-        List<Schedule> schedule = scheduleRepo.findByVetidFull_name(principal.getName()); // КАК ЭТО РЕАЛИЗОВАТЬ
+        List<Schedule> schedule = scheduleRepo.findByVetidFullName(principal.getName()); // КАК ЭТО РЕАЛИЗОВАТЬ
         Entry entry = new Entry();
         model.addAttribute("entry", entry);
         model.addAttribute("schedule", schedule);
