@@ -30,16 +30,15 @@
     <hr />
         <h5 class="label">Текст вопроса: </h5>
         <a id="text" th:text="${request.getText()}"></a>
-    <hr />
+    <div th:if="${request.getReply() != null}">
+        <hr />
         <h5 class="label">Ответ:</h5>
         <a id="reply" th:text="${request.getReply().text}"></a>
-    <hr />
-    <div th:if="${request.getReply() != null}">
+        <hr />
         <h7 class="label">Дата ответа:</h7>
         <h7><a id="replydate" th:text="${request.getReply().date}"></a></h7>
     </div>
     <hr />
-
 </div>
 
 <!-- Optional JavaScript -->
