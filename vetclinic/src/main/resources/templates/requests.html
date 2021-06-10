@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,7 +24,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Клиент</th>
             <th scope="col">Дата</th>
             <th scope="col">Текст вопроса</th>
             <th scope="col">Статус</th>
@@ -32,7 +31,6 @@
         </thead>
         <tbody>
         <tr th:each="request : ${requests}">
-            <td th:text="${request.getClientid().fullName}"></td>
             <td th:text="${request.getDate()}"></td>
             <td th:text="${request.getText()}"></td>
             <td th:text="${request.getStatus().status}"></td>
@@ -41,9 +39,6 @@
             </td>
             <td>
                 <a th:href="@{'/requests/delete/'+${request.getId()}}">Удалить</a>
-            </td>
-            <td>
-                <a th:href="@{'/newreply/'+${request.getId()}}">Ответить</a>
             </td>
         </tr>
         </tbody>

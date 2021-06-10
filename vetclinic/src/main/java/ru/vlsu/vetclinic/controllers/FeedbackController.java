@@ -1,6 +1,7 @@
 package ru.vlsu.vetclinic.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class FeedbackController {
     }
 
     //*ВОПРОСЫ*
-    //метод для возврата странички списка вопросов
+    //метод для возврата странички списка вопросов для клиента
     @GetMapping("/requests")
     public String requestsPage(Model model, Principal principal){
 
@@ -40,6 +41,18 @@ public class FeedbackController {
         return "requests";
 
     }
+
+    //метод для возврата странички списка вопросов для ветврача со статусом "Ожидает ответа"
+    @GetMapping("/vetrequests")
+    public String requestsVetPage(Model model){
+        List<Request> requests;
+        Status status = statusRepo.getById(1);
+        requests = reqRepo.findByStatus(status);
+        model.addAttribute("requests", requests);
+        return "vetrequests";
+
+    }
+
 
     //Создание вопросика
     @GetMapping("/newrequest")
@@ -94,7 +107,7 @@ public class FeedbackController {
         request.addReply(reply);
         request.setStatus(statusRepo.getById(2));
         reqRepo.save(request);
-        return "redirect:/requests";
+        return "redirect:/vetrequests";
     }
 
 
