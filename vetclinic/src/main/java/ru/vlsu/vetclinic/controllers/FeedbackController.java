@@ -17,17 +17,20 @@ public class FeedbackController {
     private RequestRepository reqRepo;
     private StatusRepository statusRepo;
     private UserRepository userRepo;
+    private ReplyRepository replyRepo;
 
     @Autowired
-    public FeedbackController(RequestRepository requestRepository, StatusRepository statusRepository, UserRepository userRepository){
+    public FeedbackController(RequestRepository requestRepository, StatusRepository statusRepository, UserRepository userRepository, ReplyRepository replyRepository){
 
         this.reqRepo = requestRepository;
         this.statusRepo= statusRepository;
         this.userRepo = userRepository;
+        this.replyRepo = replyRepository;
+
     }
 
-    //*ОБРАТНАЯ СВЯЗЬ*
-    //метод для возврата странички списка запросов
+    //*ВОПРОСЫ*
+    //метод для возврата странички списка вопросов
     @GetMapping("/requests")
     public String requestsPage(Model model, Principal principal){
 
@@ -41,10 +44,8 @@ public class FeedbackController {
     //Создание вопросика
     @GetMapping("/newrequest")
     public String createRequest(Model model){
-        List<Status> statuses = statusRepo.findAll();
         Request request = new Request();
         model.addAttribute("request", request);
-        model.addAttribute("statuses", statuses);
         return "newrequest";
     }
 
@@ -53,25 +54,48 @@ public class FeedbackController {
     public String saveRequest(Request request, Principal principal){
         User user = userRepo.findByUsername(principal.getName()).get();
         request.setClientid(user);
-        String currentDate = String.valueOf(java.time.LocalDate.now());
-        request.setDate(currentDate);
+        request.setDate(java.sql.Date.valueOf(java.time.LocalDate.now()));
+        request.setStatus(statusRepo.getById(1));
         reqRepo.save(request);
         return "redirect:/requests";
     }
 
-    /*
-    @GetMapping("/pets/edit/{id}")
-    public String showEditPet(@PathVariable("id") Integer id, Model model){
-        Pet pet = petRepo.findById(id).get();
-        List<PetType> types = typeRepo.findAll();
-        model.addAttribute("pet", pet);
-        model.addAttribute("types", types);
-        return "newpet";
+    //показ странички с деталями вопроса
+    @GetMapping("/requests/details/{id}")
+    public String showDetailsRequest(@PathVariable("id") Integer id, Model model){
+        Request request = reqRepo.findById(id).get();
+        model.addAttribute("request", request);
+        return "requestdetails";
     }
 
-    @GetMapping("/pets/delete/{id}")
-    public String showDeletePet(@PathVariable("id") Integer id, Model model){
-        petRepo.deleteById(id);
-        return "redirect:/";
-    }*/
+    //удаление вопроса
+    @GetMapping("/requests/delete/{id}")
+    public String showDeleteRequest(@PathVariable("id") Integer id, Model model){
+        reqRepo.deleteById(id);
+        return "redirect:/requests";
+    }
+
+    //*ОТВЕТЫ*
+    //Создание ответа
+    @GetMapping("/newreply/{id}")
+    public String createReply(@PathVariable("id") Integer id, Model model){
+        Reply reply = new Reply();
+        Request request = reqRepo.findById(id).get();
+        model.addAttribute("reply", reply);
+        model.addAttribute("request", request);
+        return "newreply";
+    }
+
+    //Метод собственно сохранения ответа
+    @PostMapping("/savereply/{id}")
+    public String saveReply(@PathVariable("id") Integer id, Reply reply){
+        Request request = reqRepo.findById(id).get();
+        reply.setDate(java.sql.Date.valueOf(java.time.LocalDate.now()));
+        request.addReply(reply);
+        request.setStatus(statusRepo.getById(2));
+        reqRepo.save(request);
+        return "redirect:/requests";
+    }
+
+
 }

@@ -19,11 +19,27 @@ public class Request {
     @JoinColumn(name="statusid")
     private Status status;
 
-    private String date;
+    @OneToOne(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Reply reply;
+
+    private java.sql.Date date;
 
     private String text;
 
     public Request() {
+    }
+
+    public void addReply(Reply reply){
+        reply.setRequest(this);
+        this.reply = reply;
+    }
+
+    public Reply getReply() {
+        return reply;
+    }
+
+    public void setReply(Reply reply) {
+        this.reply = reply;
     }
 
     public Integer getId() {
@@ -50,11 +66,11 @@ public class Request {
         this.status = status;
     }
 
-    public String getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
