@@ -47,14 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/authenticationUser").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/").failureUrl("/kekw")
+                .loginPage("/login").defaultSuccessUrl("/pet")
                 .loginProcessingUrl("/authenticationUser")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login").permitAll();
+                .logoutSuccessUrl("/").permitAll();
     }
 
     @Bean

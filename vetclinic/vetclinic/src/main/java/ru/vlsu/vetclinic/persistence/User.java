@@ -127,5 +127,4 @@ public class User implements UserDetails {
     public void setAdress(String address) {
         this.address = address;
     }
-
 }
