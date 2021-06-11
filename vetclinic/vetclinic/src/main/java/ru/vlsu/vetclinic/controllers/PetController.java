@@ -25,7 +25,6 @@ public class PetController {
         this.userRepo = userRepository;
 
     }
-
     //комментарий для коммита
 
     //*ЖИВОТНЫЕ*
@@ -38,6 +37,7 @@ public class PetController {
         model.addAttribute("pets", pets);
         return "pets";
     }
+
 
     @GetMapping("/newpet")
     public String createPet(Model model){
