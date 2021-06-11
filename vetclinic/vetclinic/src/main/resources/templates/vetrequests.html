@@ -11,12 +11,12 @@
     <title>Обратная связь</title>
 </head>
 <body>
-
+<div th:replace="fragments :: header" />
 <div class="container text-center">
     <h1>Animals & CO</h1>
     <h1>Страница обратной связи</h1>
 </div>
-
+<br>
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -25,6 +25,8 @@
             <th scope="col">Дата</th>
             <th scope="col">Текст вопроса</th>
             <th scope="col">Статус</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +39,7 @@
                 <a th:href="@{'/requests/details/'+${request.getId()}}">Подробнее</a>
             </td>
             <td>
-                <a th:href="@{'/newreply/'+${request.getId()}}">Ответить</a>
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{'/newreply/'+${request.getId()}}">Ответить</a>
             </td>
         </tr>
         </tbody>

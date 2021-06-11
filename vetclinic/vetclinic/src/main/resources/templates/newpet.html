@@ -1,8 +1,16 @@
 
 <!doctype html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="">
-<head th:replace="fragments :: html_head">
+<head>
     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 
@@ -28,8 +36,6 @@
                 </div>
             </div>
             <div class="form-group row">
-            </div>
-            <div class="form-group row">
                 <label class="col-form-label col-sm-4">Возраст:</label>
                 <div class="col-sm-8">
                     <input type="number" id="age" th:field="*{age}" class="form-control"/>
@@ -48,11 +54,11 @@
             </div>
             <div class="text-center p-3">
                 <div th:if="${pet.id == null}">
-                    <button type="submit" class="btn btn-primary">Добавить</button>
+                    <button type="submit" class="btn btn-success">Добавить</button>
                 </div>
                 <div th:unless="${pet.id == null}">
                 <input type="hidden" th:field="*{id}" th:value="${pet.id}" />
-                <button type="submit" class="btn btn-primary">Изменить</button>
+                <button type="submit" class="btn btn-success">Изменить</button>
                 </div>
             </div>
         </div>

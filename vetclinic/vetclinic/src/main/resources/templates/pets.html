@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: html_head">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <title>Список животных</title>
 </head>
 <body>
@@ -8,32 +16,31 @@
 <div class="container text-center">
     <h1>Animals & CO</h1>
     <div>
-        <a class="h2" th:href="@{/newpet}">Добавить животное</a>
+        <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/newpet}">Добавить животное</a>
     </div>
 </div>
-
+<br>
 <div class="container">
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">#</th>
         <th scope="col">Имя</th>
         <th scope="col">Тип</th>
         <th scope="col">Возраст (полных лет)</th>
+        <th scope="col"></th>
         <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="pet : ${pets}">
-        <th scope="row" th:text="${pet.getId()}"></th>
         <td th:text="${pet.getName()}"></td>
         <td th:text="${pet.getType().type}"></td>
         <td th:text="${pet.getAge()}"></td>
         <td>
-            <a th:href="@{'/pets/edit/'+${pet.getId()}}">Изменить</a>
+            <a class="btn btn-outline-warning " th:href="@{'/pets/edit/'+${pet.getId()}}">Изменить</a>
         </td>
         <td>
-            <a th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
+            <a class="btn btn-outline-danger " th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
         </td>
     </tr>
     </tbody>

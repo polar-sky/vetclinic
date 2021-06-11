@@ -1,7 +1,15 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: html_head" >
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <title>Animals & co</title>
 </head>
 
@@ -21,8 +29,8 @@
                     <label for="password">Пароль</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
                 </div>
-                <button type="submit" class="btn btn-primary">Логин</button>
-                <a class="px-3" th:href="@{/register}">Зарегистрироваться</a>
+                <button type="submit" class="btn btn-success">Логин</button>
+                <a class="btn btn-outline-success px-3" th:href="@{/register}">Зарегистрироваться</a>
             </form>
         </div>
     </div>
