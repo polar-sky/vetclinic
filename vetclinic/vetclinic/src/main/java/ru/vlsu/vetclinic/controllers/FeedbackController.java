@@ -53,6 +53,16 @@ public class FeedbackController {
 
     }
 
+    //метод для возврата странички часто задаваемых вопросов
+    @GetMapping("/faq")
+    public String faqPage(Model model, Principal principal){
+
+        List<Request> requests;
+        requests = reqRepo.findByClientidUsername("admin");
+        model.addAttribute("requests", requests);
+        return "faq";
+
+    }
 
     //Создание вопросика
     @GetMapping("/newrequest")
