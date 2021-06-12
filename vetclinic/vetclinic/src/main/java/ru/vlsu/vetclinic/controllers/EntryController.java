@@ -17,15 +17,16 @@ public class EntryController {
     private VetRepository vetRepo;
     private UserRepository userRepo;
     private ScheduleRepository scheduleRepo;
+    private PetRepository petRepo;
 
     //autowired - при создании данного класса спринг будет искать есть ли класс, реализующий интерфейс entryrepository и передаст этот класс в метод
     @Autowired
-    public EntryController(EntryRepository entryRepository, VetRepository vetRepository, UserRepository userRepository, ScheduleRepository scheduleRepository){
+    public EntryController(EntryRepository entryRepository, PetRepository рetRepository, VetRepository vetRepository, UserRepository userRepository, ScheduleRepository scheduleRepository){
         this.entryRepo = entryRepository;
         this.vetRepo= vetRepository;
         this.userRepo = userRepository;
         this.scheduleRepo = scheduleRepository;
-
+        this.petRepo = рetRepository;
     }
 
     //*ЗАЯВКИ*
@@ -40,15 +41,29 @@ public class EntryController {
         return "entries";
     }
 
-
-    //добавила принципалы, изменила название метода(смотри SheduleRepository)
     @GetMapping("/newentry")
-    public String createEntry(Model model, Principal principal){
-        List<Schedule> schedule = scheduleRepo.findByVetidFullName(principal.getName()); // КАК ЭТО РЕАЛИЗОВАТЬ
+    public String createEntry(@PathVariable("id") Integer id, Model model, Principal principal){    //здесь типа передаётся айди врача, но скорее всего неправильно
+        List<Pet> pets;
+        pets = petRepo.findByClientidUsername(principal.getName()); //выпадающий список животных
+        Vet vet = vetRepo.findById(id).get();
+        List <Schedule> schedules;
+        schedules = scheduleRepo.findByVetid(vet.getId()); //выпадающий список даты и времени
         Entry entry = new Entry();
         model.addAttribute("entry", entry);
-        model.addAttribute("schedule", schedule);
+        model.addAttribute("schedules", schedules);
         return "newentry";
     }
-// ещё надо как то передавать айди врача на которого нажимаешь на странице, это тоже проблема
+
+    @PostMapping("/save")
+    public String saveEntry(Entry entry, Integer vetid, Principal principal){ //надо передать vetid
+        User user = userRepo.findByUsername(principal.getName()).get();
+        Vet vet = vetRepo.findById(vetid).get();  //не знаю как правильнее: передать vetid в этот метод
+        entry.setVetid(vet);                      //или поступить также как с pettypes (передать айди из формы в метод save)
+
+        entry.setClientid(user);
+        //также надо удалить время которое клиент занял, но мне надо вытащить id schedule который он выбрал в выпадающем списке, хз как
+        entryRepo.save(entry);
+        return "redirect:/";
+    }
+
 }

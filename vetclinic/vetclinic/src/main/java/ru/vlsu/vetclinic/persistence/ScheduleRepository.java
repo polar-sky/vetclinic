@@ -9,5 +9,5 @@ import java.util.List;
 //метод заменен на тот, чтобы поиск осуществлялся по имени, а не по id,отому что я не нашла как реализовывать по id
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
-    List<Schedule> findByVetidFullName(String fullName); //И ЭТО КАК РЕАЛИЗОВАТЬ
+    List<Schedule> findByVetid(Integer id);
 }

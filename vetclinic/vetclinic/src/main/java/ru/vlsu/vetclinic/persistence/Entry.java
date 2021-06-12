@@ -21,9 +21,10 @@ public class Entry {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="clientid")
     private User clientid;
-
-    //изменила byte на int
-    private int status;
+//добавлено животное
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="petid")
+    private Pet petid;
 
     //Конструктор
     public Entry() {
