@@ -16,7 +16,7 @@ public class Schedule {
     @JoinColumn(name="vetid")
     private Vet vetid;
 
-    private Date date;
+    private java.sql.Date date;
 
     //Конструктор
     public Schedule() {
@@ -39,11 +39,11 @@ public class Schedule {
         this.vetid = vetid;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 }

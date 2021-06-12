@@ -8,6 +8,7 @@ import ru.vlsu.vetclinic.persistence.*;
 
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -48,6 +49,8 @@ public class EntryController {
         Vet vet = vetRepo.findById(id).get();
         List <Schedule> schedules = scheduleRepo.findByVetid(vet); //выпадающий список даты и времени
         Entry entry = new Entry();
+        //TODO сразу записываем в объект записи на прием врача так как выбрали его на прошлом этапе
+        entry.setVetid(vet);
         model.addAttribute("entry", entry);
         model.addAttribute("schedules", schedules);
         model.addAttribute("pets", pets);
@@ -57,12 +60,12 @@ public class EntryController {
     @PostMapping("/save")
     public String saveEntry(Entry entry, Integer vetid, Principal principal){ //надо передать vetid
         User user = userRepo.findByUsername(principal.getName()).get();
-        Vet vet = vetRepo.findById(vetid).get();  //не знаю как правильнее: передать vetid в этот метод
-        entry.setVetid(vet);                      //!или поступить также как с pettypes (передать айди из формы в метод save)
-
         entry.setClientid(user);
         //также надо удалить время которое клиент занял, но мне надо вытащить id schedule который он выбрал в выпадающем списке, хз как
         entryRepo.save(entry);
+        //TODO удаляем время которое занял клиент см. findByDate метод в репозитории schedule
+        Schedule schedule = scheduleRepo.findByDate(entry.getDate()) ;
+        scheduleRepo.delete(schedule);
         return "redirect:/";
     }
 
