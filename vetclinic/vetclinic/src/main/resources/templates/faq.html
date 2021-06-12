@@ -11,12 +11,12 @@
     <title>Часто задаваемые вопросы</title>
 </head>
 <body>
-
+<div th:replace="fragments :: header" />
 <div class="container text-center">
     <h1>Animals & CO</h1>
     <h1>Часто задаваемые вопросы</h1>
     <div>
-        <a class="h2" th:href="@{/newrequest}">Задать вопрос</a>
+        <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/newrequest}">Задать вопрос</a>
     </div>
 </div>
 <div class="container text-center" th:each="request : ${requests}">
