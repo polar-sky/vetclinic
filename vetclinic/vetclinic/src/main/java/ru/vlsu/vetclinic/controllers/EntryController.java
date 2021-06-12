@@ -32,25 +32,25 @@ public class EntryController {
     //*ЗАЯВКИ*
     //метод для возврата странички списка заявок
     //изменила маппинг, чтобы записи выводились на страничку /entries, а не на index
-    @GetMapping("/entries")
+/*    @GetMapping("/entries")
     public String entryPage(Model model, Principal principal){
 
         List<Entry> entries;
         entries = entryRepo.findByClientidUsername(principal.getName());
         model.addAttribute("entries", entries);
         return "entries";
-    }
+    }*/
 
-    @GetMapping("/newentry")
+    @GetMapping("/vets/newentry/{id}")
     public String createEntry(@PathVariable("id") Integer id, Model model, Principal principal){    //здесь типа передаётся айди врача, но скорее всего неправильно
         List<Pet> pets;
         pets = petRepo.findByClientidUsername(principal.getName()); //выпадающий список животных
         Vet vet = vetRepo.findById(id).get();
-        List <Schedule> schedules;
-        schedules = scheduleRepo.findByVetid(vet.getId()); //выпадающий список даты и времени
+        List <Schedule> schedules = scheduleRepo.findByVetid(vet); //выпадающий список даты и времени
         Entry entry = new Entry();
         model.addAttribute("entry", entry);
         model.addAttribute("schedules", schedules);
+        model.addAttribute("pets", pets);
         return "newentry";
     }
 
@@ -58,7 +58,7 @@ public class EntryController {
     public String saveEntry(Entry entry, Integer vetid, Principal principal){ //надо передать vetid
         User user = userRepo.findByUsername(principal.getName()).get();
         Vet vet = vetRepo.findById(vetid).get();  //не знаю как правильнее: передать vetid в этот метод
-        entry.setVetid(vet);                      //или поступить также как с pettypes (передать айди из формы в метод save)
+        entry.setVetid(vet);                      //!или поступить также как с pettypes (передать айди из формы в метод save)
 
         entry.setClientid(user);
         //также надо удалить время которое клиент занял, но мне надо вытащить id schedule который он выбрал в выпадающем списке, хз как

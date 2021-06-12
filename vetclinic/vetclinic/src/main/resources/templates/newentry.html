@@ -31,7 +31,7 @@
                 <div class="col-sm-8">
                     <select th:field="*{petid}" class="form-control" required>
                         <th:block th:each="petids : ${pets}">
-                            <option  th:text="${petids.getName()}" th:value="${petids.getId()}"></option> //здесь тоже не так всё
+                            <option  th:text="${petids.getName()}" th:value="${petids.getId()}"></option> <!--//здесь тоже не так всё-->
                         </th:block>
                     </select>
                 </div>
@@ -41,9 +41,9 @@
                 <label class="col-form-label col-sm-4">Дата и время:</label>
 
                 <div class="col-sm-8">
-                    <select th:field="*{schedules}" class="form-control" required>// таблица вообще ни с чем не связана, как прописать правильно
+                    <select th:field="*{date}" class="form-control" required><!--// таблица вообще ни с чем не связана, как прописать правильно-->
                         <th:block th:each="entrySchedule : ${schedules}">
-                            <option  th:text="${entrySchedule.getDate()}" th:value="${entrySchedule.getId()}"></option> //не уверена что правильно
+                            <option  th:text="${entrySchedule.getDate()}" th:value="${entrySchedule.getId()}"></option> <!--//не уверена что правильно-->
                         </th:block>
                     </select>
                 </div>

@@ -56,7 +56,7 @@ public class PetController {
         return "newpet";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/savepet")
     public String savePet(Pet pet, Principal principal){
         User user = userRepo.findByUsername(principal.getName()).get();
         pet.setClientid(user);

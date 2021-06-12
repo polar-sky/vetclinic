@@ -31,10 +31,7 @@
       <td th:text="${vet.getQualification()}"></td>
       <td th:text="${vet.getSpecialization()}"></td>
       <td>
-        <a th:href="@{'/pets/edit/'+${vet.getId()}}">Изменить</a>
-      </td>
-      <td>
-        <a th:href="@{'/pets/delete/'+${vet.getId()}}">Удалить</a>
+        <a th:href="@{'/vets/newentry/'+${vet.getId()}}">Записаться</a>
       </td>
     </tr>
     </tbody>

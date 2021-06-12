@@ -9,5 +9,6 @@ import java.util.List;
 //метод заменен на тот, чтобы поиск осуществлялся по имени, а не по id,отому что я не нашла как реализовывать по id
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
-    List<Schedule> findByVetid(Integer id);
+    //передаем Vet vet так как поле vetid у нас типа vet а не integer
+    List<Schedule> findByVetid(Vet vet);
 }
