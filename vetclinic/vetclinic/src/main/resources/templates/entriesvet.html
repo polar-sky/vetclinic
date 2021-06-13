@@ -8,49 +8,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Список животных</title>
+    <title>Список заявок</title>
 </head>
 <body>
 
-<div class="container text-center">
-    <h1>Animals & CO</h1>
-    <div>
-        <a class="h2" th:href="@{/newpet}">Добавить животное</a>
-    </div>
-    <div>
-        <a class="h2" th:href="@{/types}">Виды животных</a>
-    </div>
-    <div>
-        <a class="h2" th:href="@{/entriesvet}">Заявки</a>
-    </div>
-</div>
 
 <div class="container">
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Тип</th>
-        <th scope="col">Возраст (полных лет)</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pet : ${pets}">
-        <th scope="row" th:text="${pet.getId()}"></th>
-        <td th:text="${pet.getName()}"></td>
-        <td th:text="${pet.getType().type}"></td>
-        <td th:text="${pet.getAge()}"></td>
-        <td>
-            <a th:href="@{'/pets/edit/'+${pet.getId()}}">Изменить</a>
-        </td>
-        <td>
-            <a th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Имя клиента</th>
+            <th scope="col">Питомец</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entrylist : ${entries}">
+            <th scope="row" th:text="${entrylist.getId()}"></th>
+            <td th:text="${entrylist.getDate()}"></td>
+            <td th:text="${entrylist.getClientid().getFullName()}"></td>
+            <td th:text="${entrylist.getPetid().getName()}"></td>
+            <td>
+                <a th:href="@{'/entriesvet/newappt/'+${entrylist.getId()}}">Оформить посещение</a> <!--доступно только врачу-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- Optional JavaScript -->

@@ -12,6 +12,6 @@ import java.util.List;
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     //TODO передаем Vet vet так как поле vetid у нас типа vet а не integer
     List<Schedule> findByVetid(Vet vet);
-    //TODO ищем элемент расписания по дате чтобы потом удалить
-    Schedule findByDate( java.sql.Date date);
+
+    Schedule findByDateAndVetid( java.sql.Date date, Vet vetid);
 }
