@@ -54,17 +54,17 @@ public class EntryController {
         model.addAttribute("entry", entry);
         model.addAttribute("schedules", schedules);
         model.addAttribute("pets", pets);
+        model.addAttribute("vet", vet);
         return "newentry";
     }
 
     @PostMapping("/save")
-    public String saveEntry(Entry entry, Integer vetid, Principal principal){ //надо передать vetid
+    public String saveEntry(Entry entry, Principal principal){ //надо передать vetid
         User user = userRepo.findByUsername(principal.getName()).get();
         entry.setClientid(user);
-        //также надо удалить время которое клиент занял, но мне надо вытащить id schedule который он выбрал в выпадающем списке, хз как
         entryRepo.save(entry);
-        //TODO удаляем время которое занял клиент см. findByDate метод в репозитории schedule
-        Schedule schedule = scheduleRepo.findByDate(entry.getDate()) ;
+        //TODO удаляем время которое занял клиент см. findByDateAndVetid метод в репозитории schedule
+        Schedule schedule = scheduleRepo.findByDateAndVetid(entry.getDate(), entry.getVetid()) ;
         scheduleRepo.delete(schedule);
         return "redirect:/";
     }
