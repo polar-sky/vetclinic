@@ -35,6 +35,10 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    //добавлен врач
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="vetid")
+    private Vet vetid;
 
     public User() {
     }
@@ -126,5 +130,14 @@ public class User implements UserDetails {
 
     public void setAdress(String address) {
         this.address = address;
+    }
+
+    //добавлен врач
+    public Vet getVetid() {
+        return vetid;
+    }
+
+    public void setVetid(Vet vetid) {
+        this.vetid = vetid;
     }
 }

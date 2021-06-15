@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface EntryRepository extends JpaRepository<Entry, Integer> {
     List<Entry> findByClientidUsername(String username);
+    Entry findByDateAndVetid(java.sql.Date date, Vet vetid);
+    List<Entry> findByVetid (Integer id);
 }
