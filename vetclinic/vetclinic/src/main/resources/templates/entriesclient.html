@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>Записи на прием</title>
+</head>
+<body>
+<div th:replace="fragments :: header" />
+<div class="container text-center">
+    <h1>Animals & CO</h1>
+
+    <div sec:authorize="hasAuthority('ROLE_USER')">
+
+        <div>
+            <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/newentry}">Записаться на прием</a>
+        </div>
+        <br>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Врач</th>
+                    <th scope="col">Животное</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${entries}">
+                    <td th:text="${entry.getDate()}"></td>
+                    <td th:text="${entry.getVetid().getFullName()}"></td>
+                    <td th:text="${entry.getPetid().name}"></td>
+                    <td>
+                        <a class="btn btn-outline-danger " th:href="@{'/entriesclient/delete/'+${entry.getId()}}">Отменить запись</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
