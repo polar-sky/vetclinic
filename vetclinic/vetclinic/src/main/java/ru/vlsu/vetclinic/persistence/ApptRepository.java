@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface ApptRepository extends JpaRepository<Appt, Integer> {
     List<Appt> findByClientidUsername(String username);
-    List<Appt> findByVetid (Integer id);
+    List<Appt> findByVetid (Vet vetid);
 }

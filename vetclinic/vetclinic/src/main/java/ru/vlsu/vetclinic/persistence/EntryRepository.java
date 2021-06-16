@@ -10,5 +10,5 @@ import java.util.List;
 public interface EntryRepository extends JpaRepository<Entry, Integer> {
     List<Entry> findByClientidUsername(String username);
     Entry findByDateAndVetid(java.sql.Date date, Vet vetid);
-    List<Entry> findByVetid (Integer id);
+    List<Entry> findByVetid (Vet vetid);
 }

@@ -35,6 +35,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
     //добавлен врач
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="vetid")

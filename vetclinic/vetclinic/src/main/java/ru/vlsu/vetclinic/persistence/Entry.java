@@ -1,8 +1,8 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+
 //импортировала тип данных date
-import java.util.Date;
 
 @Entity
 @Table(name = "entry")
@@ -13,6 +13,8 @@ public class Entry {
     private Integer id;
 
     //тип данных который подходит для sql'евского date
+    //@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    //@Temporal (TemporalType.TIMESTAMP)
     private java.sql.Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)

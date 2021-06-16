@@ -46,7 +46,8 @@ public class EntryController {
     public String entryPageForVet(Model model, Principal principal) {
         User user =userRepo.findByUsername(principal.getName()).get();
         List<Entry> entries;
-        entries = entryRepo.findByVetid(user.getVetid().getId()); //здесь ошибка в представлении
+        //Vet vet = user.getVetid();
+        entries = entryRepo.findByVetid(user.getVetid()); //здесь ошибка в представлении
         model.addAttribute("entries", entries);
         return "entriesvet";
     }

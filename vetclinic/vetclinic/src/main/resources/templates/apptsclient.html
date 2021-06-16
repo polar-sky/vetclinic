@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Список заявок</title>
+    <title>Список посещений</title>
 </head>
 <body>
 
@@ -18,20 +18,27 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Дата</th>
-            <th scope="col">Имя клиента</th>
             <th scope="col">Питомец</th>
+            <th scope="col">Тип посещения</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Диагноз</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Врач</th>
             <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="entrylist : ${entries}">
-            <th scope="row" th:text="${entrylist.getId()}"></th>
-            <td th:text="${entrylist.getDate()}"></td>
-            <td th:text="${entrylist.getClientid().getFullName()}"></td>
-            <td th:text="${entrylist.getPetid().getName()}"></td>
+        <tr th:each="apptlist : ${apptsl}">
+            <th scope="row" th:text="${apptlist.getId()}"></th>
+            <td th:text="${apptlist.getPetid().getName()}"></td>
+            <td th:text="${apptlist.getTypeAppt()}"></td>
+            <td th:text="${apptlist.getDescription()}"></td>
+            <td th:text="${apptlist.getDiagnose()}"></td>
+            <td th:text="${apptlist.getDate()}"></td>
+            <td th:text="${apptlist.getVetid().getFullName()}"></td>
+            <!-- надо добавить что страница только для пациента-->
             <td>
-                <a th:href="@{'/apptsvet/newappt/'+${entrylist.getId()}}">Оформить посещение</a> <!--доступно только врачу-->
+                <a th:href="@{'/apptsclient/deleteclient/'+${apptlist.getId()}}">Удалить</a>
             </td>
         </tr>
         </tbody>

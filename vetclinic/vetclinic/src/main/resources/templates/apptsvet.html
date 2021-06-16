@@ -37,7 +37,9 @@
             <td th:text="${appt.getDate()}"></td>
             <td th:text="${appt.getClientid().getFullName()}"></td>
             <!-- надо добавить что страница только для врачей-->
-
+            <td>
+                <a th:href="@{'/apptsvet/deletevet/'+${appt.getId()}}">Удалить</a>
+            </td>
         </tr>
         </tbody>
     </table>

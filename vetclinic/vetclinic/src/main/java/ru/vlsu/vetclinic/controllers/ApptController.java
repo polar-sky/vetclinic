@@ -3,12 +3,12 @@ package ru.vlsu.vetclinic.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.vlsu.vetclinic.persistence.*;
 
-
 import java.security.Principal;
-import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -37,15 +37,15 @@ public class ApptController {
     public String apptPageForClient(Model model, Principal principal) {
         List<Appt> appts;
         appts = apptRepo.findByClientidUsername(principal.getName());
-        model.addAttribute("appts", appts);
-        return "appts";
+        model.addAttribute("apptsl", appts);
+        return "apptsclient";
     }
 
     @GetMapping("/apptsvet") ////////////////////////////для врача
     public String apptPageForVet(Model model, Principal principal) {
         User user =userRepo.findByUsername(principal.getName()).get();
         List<Appt> appts;
-       appts = apptRepo.findByVetid(user.getVetid().getId());
+       appts = apptRepo.findByVetid(user.getVetid());
        model.addAttribute("appts", appts);
         return "apptsvet";
     }
