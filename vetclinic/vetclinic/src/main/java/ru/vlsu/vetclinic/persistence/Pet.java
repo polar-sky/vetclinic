@@ -23,7 +23,7 @@ public class Pet {
     @JoinColumn(name="id_type")
     private PetType type;
 
-    @OneToMany(mappedBy = "petid", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "petid", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appt> appts;
     //Конструктор
     public Pet() {

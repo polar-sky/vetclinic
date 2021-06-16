@@ -27,7 +27,7 @@ public class Appt {
     @JoinColumn(name="clientid")
     private User clientid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="petid")
     private Pet petid;
 
