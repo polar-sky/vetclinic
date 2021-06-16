@@ -19,18 +19,18 @@
     <div class="container" sec:authorize="hasAuthority('ROLE_VET')">
         <h3 class="mt-10 font-italic text-center">Добрый день, коллега</h3>
         <h5 class="mt-3 text-center">Хорошего и продуктивного дня!</h5>
-    </div>
-    <div>
-        <a class="h2" th:href="@{/entriesvet}">Заявки</a>
-    </div>
-    <div>
-        <a class="h2" th:href="@{/apptsvet}">Посещения</a>
+        <div>
+            <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/entriesvet}">Заявки</a>
+        </div>
+        <div>
+            <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/apptsvet}">Посещения</a>
+        </div>
     </div>
 
 </div>
     <div sec:authorize="hasAuthority('ROLE_USER')">
 
-        <div>
+        <div class="container">
             <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/newpet}">Добавить животное</a>
         </div>
         <br>

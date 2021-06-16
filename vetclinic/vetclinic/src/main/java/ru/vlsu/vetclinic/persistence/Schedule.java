@@ -2,7 +2,7 @@ package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
 //добавла тип данных date
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "schedule")
@@ -16,7 +16,7 @@ public class Schedule {
     @JoinColumn(name="vetid")
     private Vet vetid;
 
-    private java.sql.Date date;
+    private Date date;
 
     //Конструктор
     public Schedule() {
@@ -39,11 +39,11 @@ public class Schedule {
         this.vetid = vetid;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

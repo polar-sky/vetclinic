@@ -13,7 +13,7 @@ public class Reply {
 
     private String text;
 
-    private java.sql.Date date;
+    private Date date;
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="requestid")

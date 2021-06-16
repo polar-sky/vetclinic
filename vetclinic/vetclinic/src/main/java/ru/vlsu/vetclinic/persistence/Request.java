@@ -1,7 +1,7 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="request")
@@ -22,7 +22,7 @@ public class Request {
     @OneToOne(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Reply reply;
 
-    private java.sql.Date date;
+    private Date date;
 
     private String text;
 
@@ -66,11 +66,11 @@ public class Request {
         this.status = status;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

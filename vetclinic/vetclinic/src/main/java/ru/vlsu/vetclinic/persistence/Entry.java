@@ -1,6 +1,7 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 //импортировала тип данных date
 
@@ -15,7 +16,7 @@ public class Entry {
     //тип данных который подходит для sql'евского date
     //@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     //@Temporal (TemporalType.TIMESTAMP)
-    private java.sql.Date date;
+    private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="vetid")
@@ -42,11 +43,11 @@ public class Entry {
         this.id = id;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.vlsu.vetclinic.persistence.*;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -62,7 +63,7 @@ public class ApptController {
     @PostMapping("/saveappt")
     public String saveAppt(Appt appt, Integer id, Principal principal){
         apptRepo.save(appt);
-        Entry entry = entryRepo.findByDateAndVetid(appt.getDate(), appt.getVetid()) ; // сделала как в entry чтоюб не париться
+        Entry entry = entryRepo.findByDateAndVetid((Date) appt.getDate(), appt.getVetid()) ; // сделала как в entry чтоюб не париться
         entryRepo.delete(entry);
         return "redirect:/";
     }

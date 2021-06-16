@@ -1,6 +1,5 @@
 package ru.vlsu.vetclinic.controllers;
 
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +8,6 @@ import ru.vlsu.vetclinic.persistence.*;
 import java.util.Date;
 
 import java.security.Principal;
-//import java.sql.Date;
 import java.util.List;
 
 @Controller

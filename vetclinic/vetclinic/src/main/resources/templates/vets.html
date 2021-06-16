@@ -11,13 +11,12 @@
   <title>Список врачей</title>
 </head>
 <body>
-
+<div th:replace="fragments :: header" />
 
 <div class="container">
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Имя</th>
       <th scope="col">Квалификация</th>
       <th scope="col">Специализация</th>
@@ -26,7 +25,6 @@
     </thead>
     <tbody>
     <tr th:each="vet : ${vets}">
-      <th scope="row" th:text="${vet.getId()}"></th>
       <td th:text="${vet.getFullName()}"></td>
       <td th:text="${vet.getQualification()}"></td>
       <td th:text="${vet.getSpecialization()}"></td>

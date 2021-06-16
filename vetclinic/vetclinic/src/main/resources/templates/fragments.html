@@ -21,7 +21,8 @@
                             <a class="nav-link" th:href="@{/pet}">Мои питомцы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Записаться на приём</a>
+                            <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/entriesvet}">Записи клиентов</a>
+                            <a sec:authorize="hasAuthority('ROLE_USER')" class="nav-link" th:href="@{/entriesclient}">Записаться на приём</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/faq}">Часто задаваемые вопросы</a>

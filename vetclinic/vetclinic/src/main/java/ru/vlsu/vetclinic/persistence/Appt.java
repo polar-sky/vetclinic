@@ -1,6 +1,7 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "appt")
@@ -15,7 +16,7 @@ public class Appt {
     //тип данных который подходит для sql'евского date
     //@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     //@Temporal (TemporalType.TIMESTAMP)
-    private java.sql.Date date;
+    private Date date;
 
     private  String description;
 
@@ -55,11 +56,11 @@ public class Appt {
         this.typeAppt = typeAppt;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
