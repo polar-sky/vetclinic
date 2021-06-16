@@ -52,7 +52,7 @@ public class ApptController {
     }
 
     @GetMapping("/apptsvet/newappt/{id}") //только для врача//выбирает заявку, передаётся айди и создает посещение
-    public String createAppt(@PathVariable("id") Integer id, Model model, Principal principal){
+    public String createAppt(@PathVariable("id") Integer id, Model model){
         Entry entry = entryRepo.findById(id).get();
         Appt appt = new Appt();
         model.addAttribute("entry", entry);
@@ -60,22 +60,28 @@ public class ApptController {
         return "newappt";
     }
 
-    @PostMapping("/saveappt")
-    public String saveAppt(Appt appt, Integer id, Principal principal){
+    @PostMapping("/saveappt/{id}")
+    public String saveAppt(@PathVariable("id") Integer entryid, Appt appt, Principal principal){
+        User user = userRepo.findByUsername(principal.getName()).get();
+        appt.setVetid(user.getVetid());
+        Entry entry = entryRepo.getById(entryid);
+        appt.setDate(entry.getDate());
+        appt.setPetid(entry.getPetid());
+        appt.setClientid(entry.getClientid());
         apptRepo.save(appt);
-        Entry entry = entryRepo.findByDateAndVetid((Date) appt.getDate(), appt.getVetid()) ; // сделала как в entry чтоюб не париться
-        entryRepo.delete(entry);
+       // Entry entry = entryRepo.getById(appt.getEntryid());
+       // entryRepo.delete(entry);
         return "redirect:/";
     }
     //видимо два делита надо
     @GetMapping("/apptsvet/deletevet/{id}")
-    public String showDeleteApptVet(@PathVariable("id") Integer id, Model model){
+    public String showDeleteApptVet(@PathVariable("id") Integer id){
         apptRepo.deleteById(id);
         return "redirect:/";
     }
 
     @GetMapping("/apptsclient/deleteclient/{id}")
-    public String showDeleteApptClient(@PathVariable("id") Integer id, Model model){
+    public String showDeleteApptClient(@PathVariable("id") Integer id){
         apptRepo.deleteById(id);
         return "redirect:/";
     }

@@ -16,21 +16,17 @@
 <div th:replace="fragments :: header" />
 <div class="container text-center">
     <h1>Animals & CO</h1>
-    <div th:if="${entry.id == null}"><h2>Создать посещение</h2></div>
+    <div><h2>Создать посещение</h2></div>
 
 </div>
 <div class="container">
-    <form th:action="@{/saveappt}" th:object="${appt}" method="post">
+    <form th:action="@{'/saveappt/'+${entry.getId()}}" th:object="${appt}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <input type="hidden" th:field="*{petid}" th:value="${entry.petid}" />
-
-        <input type="hidden" th:field="*{date}" th:value="${entry.getDate()}" />     <!-- Error -->
-        <input type="hidden" th:field="*{clientid}" th:value="${entry.clientid}" />
-        <input type="hidden" th:field="*{vetid}" th:value="${entry.vetid}" />
         <div class="m-3">
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Тип приёма:</label>
                 <div class="col-sm-8">
+                    <input type="hidden" th:field="*{petid}" th:value="${entry.getPetid().getId()}" />
                     <input type="text" id="typeAppt" th:field="*{typeAppt}" class="form-control"/>
                 </div>
             </div>
@@ -47,18 +43,12 @@
                 </div>
             </div>
             <div class="text-center p-3">
-                <div th:if="${appt.id == null}">
+                <div>
                     <button type="submit" class="btn btn-success">Добавить</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

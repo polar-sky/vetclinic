@@ -13,10 +13,7 @@ public class Appt {
 
     private  String typeAppt;
 
-    //тип данных который подходит для sql'евского date
-    //@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    //@Temporal (TemporalType.TIMESTAMP)
-    private Date date;
+    private java.sql.Date date;
 
     private  String description;
 
@@ -29,7 +26,6 @@ public class Appt {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="clientid")
     private User clientid;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="petid")
@@ -68,7 +64,7 @@ public class Appt {
         return description;
     }
 
-    public void getDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -76,7 +72,7 @@ public class Appt {
         return diagnose;
     }
 
-    public void getDiagnose(String diagnose) {
+    public void setDiagnose(String diagnose) {
         this.diagnose = diagnose;
     }
 
