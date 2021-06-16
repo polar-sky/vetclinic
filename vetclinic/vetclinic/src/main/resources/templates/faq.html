@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Часто задаваемые вопросы</title>
+</head>
+<body>
+<div th:replace="fragments :: header" />
+<div class="container text-center">
+    <h1>Animals & CO</h1>
+    <h1>Часто задаваемые вопросы</h1>
+    <div>
+        <a class="btn btn-success my-2 mr-2 my-sm-0" th:href="@{/newrequest}">Задать вопрос</a>
+    </div>
+</div>
+<div class="container text-center" th:each="request : ${requests}">
+    <div class="mt-2 mb-2 card">
+        <div class="card-body">
+            <h5 class="font-weight-bold card-title" th:text="${request.getText()}"></h5>
+            <h7 class="card-text" th:text="${request.getReply().text}" ></h7>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

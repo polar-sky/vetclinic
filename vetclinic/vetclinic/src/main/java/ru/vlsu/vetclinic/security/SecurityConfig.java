@@ -30,11 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new UserAuthService(userRepository);
     }
 
-    /*@Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }*/
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -47,14 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/authenticationUser").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/faq").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/vetrequests").hasAuthority("ROLE_VET")
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/").failureUrl("/kekw")
+                .loginPage("/login").defaultSuccessUrl("/pet")
                 .loginProcessingUrl("/authenticationUser")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login").permitAll();
+                .logoutSuccessUrl("/").permitAll();
     }
 
     @Bean

@@ -38,12 +38,4 @@ public class UserService {
     public List<User> allUsers(){
         return repository.findAll();
     }
-
-    public boolean deleteUser(Long userId) {
-        if (repository.findById(userId).isPresent()) {
-            repository.deleteById(userId);
-            return true;
-        }
-        return false;
-    }
 }
