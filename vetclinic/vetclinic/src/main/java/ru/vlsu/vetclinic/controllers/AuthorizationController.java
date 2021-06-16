@@ -32,6 +32,7 @@ public class AuthorizationController {
         return "register";
     }
 
+    //коммит
     @PostMapping("/register")
     public String registerNewUser(@Valid UserRepr userRepr, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
