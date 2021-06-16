@@ -25,12 +25,16 @@
                             <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/entriesvet}">Записи клиентов</a>
                             <a sec:authorize="hasAuthority('ROLE_USER')" class="nav-link" th:href="@{/entriesclient}">Записаться на приём</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/faq}">Часто задаваемые вопросы</a>
+                        <li>
+                            <a sec:authorize="hasAuthority('ROLE_USER')" class="nav-link" th:href="@{/apptsclient}">Приемы</a>
+                            <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/apptsvet}">Приемы</a>
                         </li>
                         <li class="nav-item">
                             <a sec:authorize="hasAuthority('ROLE_USER')" class="nav-link" th:href="@{/requests}">Обратная связь</a>
                             <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/vetrequests}">Вопросы пользователей</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/faq}">Часто задаваемые вопросы</a>
                         </li>
                     </ul>
                 </div>

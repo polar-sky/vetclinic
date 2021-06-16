@@ -69,8 +69,8 @@ public class ApptController {
         appt.setPetid(entry.getPetid());
         appt.setClientid(entry.getClientid());
         apptRepo.save(appt);
-       // Entry entry = entryRepo.getById(appt.getEntryid());
-       // entryRepo.delete(entry);
+        //Entry entry = entryRepo.getById(appt.getEntryid());
+        //entryRepo.delete(entry);
         return "redirect:/";
     }
     //видимо два делита надо

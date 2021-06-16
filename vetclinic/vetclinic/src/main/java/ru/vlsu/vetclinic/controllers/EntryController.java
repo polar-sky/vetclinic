@@ -71,8 +71,8 @@ public class EntryController {
         User user = userRepo.findByUsername(principal.getName()).get();
         entry.setClientid(user);
         entryRepo.save(entry);
-        Schedule schedule = scheduleRepo.findByDateAndVetid(entry.getDate(), entry.getVetid()) ;
-        scheduleRepo.delete(schedule);
+        //Schedule schedule = scheduleRepo.findByDateAndVetid(entry.getDate(), entry.getVetid()) ;
+        //scheduleRepo.delete(schedule);
         return "redirect:/entriesclient";
 
     }
