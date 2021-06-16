@@ -18,7 +18,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/pet}">Мои питомцы</a>
+                            <a sec:authorize="hasAuthority('ROLE_USER')" class="nav-link" th:href="@{/pet}">Мои питомцы</a>
+                            <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/pet}">Главная</a>
                         </li>
                         <li class="nav-item">
                             <a sec:authorize="hasAuthority('ROLE_VET')" class="nav-link" th:href="@{/entriesvet}">Записи клиентов</a>

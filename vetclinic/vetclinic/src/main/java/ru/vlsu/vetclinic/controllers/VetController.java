@@ -20,11 +20,10 @@ public class VetController {
 
     //autowired - при создании данного класса спринг будет искать есть ли класс, реализующий интерфейс vetrepository и передаст этот класс в метод
     @Autowired
-    public VetController(EntryRepository entryRepository, VetRepository vetRepository, UserRepository userRepository, ScheduleRepository scheduleRepository){
+    public VetController(EntryRepository entryRepository, VetRepository vetRepository, UserRepository userRepository){
         this.entryRepo = entryRepository;
         this.vetRepo= vetRepository;
         this.userRepo = userRepository;
-        this.scheduleRepo = scheduleRepository;
 
     }
 
