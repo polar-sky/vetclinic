@@ -17,7 +17,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Питомец</th>
             <th scope="col">Тип посещения</th>
             <th scope="col">Описание</th>
@@ -29,7 +28,6 @@
         </thead>
         <tbody>
         <tr th:each="apptlist : ${apptsl}">
-            <th scope="row" th:text="${apptlist.getId()}"></th>
             <td th:text="${apptlist.getPetid().getName()}"></td>
             <td th:text="${apptlist.getTypeAppt()}"></td>
             <td th:text="${apptlist.getDescription()}"></td>
@@ -38,7 +36,7 @@
             <td th:text="${apptlist.getVetid().getFullName()}"></td>
             <!-- надо добавить что страница только для пациента-->
             <td>
-                <a th:href="@{'/apptsclient/deleteclient/'+${apptlist.getId()}}">Удалить</a>
+                <a class="btn btn-outline-danger" th:href="@{'/apptsclient/deleteclient/'+${apptlist.getId()}}">Удалить</a>
             </td>
         </tr>
         </tbody>
