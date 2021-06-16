@@ -45,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/faq").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/vetrequests").hasAuthority("ROLE_VET")
+                .antMatchers("/entriesvet").hasAuthority("ROLE_VET")
+                .antMatchers("/apptsvet").hasAuthority("ROLE_VET")
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
