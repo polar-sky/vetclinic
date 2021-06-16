@@ -9,5 +9,4 @@ public interface RequestRepository extends JpaRepository<Request, Integer>{
     List<Request> findByClientidUsername(String username);
 
     List<Request> findByStatus(Status status);
-
 }
