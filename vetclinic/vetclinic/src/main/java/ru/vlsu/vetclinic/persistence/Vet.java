@@ -3,22 +3,25 @@ package ru.vlsu.vetclinic.persistence;
 import javax.persistence.*;
 
 @Entity
-@Table(name="vet")
+@Table(name = "vet")
 public class Vet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String full_name;
+    @JoinColumn(name = "full_name")
+    private String fullName;
 
     private String qualification;
 
     private String specialization;
 
+    //Конструктор
     public Vet() {
     }
 
+    //Геттеры сеттеры
     public Integer getId() {
         return id;
     }
@@ -27,12 +30,12 @@ public class Vet {
         this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getQualification() {

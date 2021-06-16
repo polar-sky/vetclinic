@@ -1,44 +1,49 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+//добавла тип данных date
 import java.util.Date;
 
 @Entity
-@Table(name="schedule")
+@Table(name = "schedule")
 public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer vetid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="vetid")
+    private Vet vetid;
 
-    private Date date;
+    private java.sql.Date date;
 
+    //Конструктор
     public Schedule() {
     }
 
+    //Геттеры сеттеры
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getVetid() {
+    public Vet getVetid() {
         return vetid;
     }
 
-    public void setVetid(Integer vetid) {
+    public void setVetid(Vet vetid) {
         this.vetid = vetid;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 }
