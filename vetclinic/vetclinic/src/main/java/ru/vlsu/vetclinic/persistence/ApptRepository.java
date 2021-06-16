@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface ApptRepository extends JpaRepository<Appt, Integer> {
+
     List<Appt> findByClientidUsername(String username);
+    List<Appt> findByPetid(Pet pet);
     List<Appt> findByVetid (Vet vetid);
 }

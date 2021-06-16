@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.vlsu.vetclinic.persistence.*;
 
 import java.security.Principal;
-import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -32,12 +31,20 @@ public class ApptController {
     }
 
     //*ПОСЕЩЕНИЯ*
-    //метод для возврата странички списка заявок
-    //изменила маппинг, чтобы записи выводились на страничку /entries, а не на index
+    //метод для возврата странички списка приемов
+    @GetMapping("/apptspet/{id}") ////////////////////////////вывод приемов конкретного животного
+    public String apptPageForClient(@PathVariable("id") Integer petid, Model model) {
+        Pet pet = petRepo.getById(petid);
+        List<Appt> appts = apptRepo.findByPetid(pet);
+        model.addAttribute("apptsl", appts);
+        model.addAttribute("pet", pet);
+        return "apptspet";
+    }
+
+    //общий список приемов клиента
     @GetMapping("/apptsclient") ////////////////////////////для клиента
     public String apptPageForClient(Model model, Principal principal) {
-        List<Appt> appts;
-        appts = apptRepo.findByClientidUsername(principal.getName());
+        List<Appt> appts = apptRepo.findByClientidUsername(principal.getName());
         model.addAttribute("apptsl", appts);
         return "apptsclient";
     }
@@ -69,8 +76,8 @@ public class ApptController {
         appt.setPetid(entry.getPetid());
         appt.setClientid(entry.getClientid());
         apptRepo.save(appt);
-        //Entry entry = entryRepo.getById(appt.getEntryid());
-        //entryRepo.delete(entry);
+        //удаляем запись на прием после того как сохранили объект приема
+        entryRepo.delete(entry);
         return "redirect:/";
     }
     //видимо два делита надо

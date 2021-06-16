@@ -1,6 +1,7 @@
 package ru.vlsu.vetclinic.persistence;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "pet")
@@ -22,6 +23,8 @@ public class Pet {
     @JoinColumn(name="id_type")
     private PetType type;
 
+    @OneToMany(mappedBy = "petid", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Appt> appts;
     //Конструктор
     public Pet() {
     }
@@ -67,4 +70,11 @@ public class Pet {
         this.type = type;
     }
 
+    public List<Appt> getAppts() {
+        return appts;
+    }
+
+    public void setAppts(List<Appt> appts) {
+        this.appts = appts;
+    }
 }

@@ -44,6 +44,7 @@
                     <th scope="col">Возраст (полных лет)</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,6 +57,9 @@
                     </td>
                     <td>
                         <a class="btn btn-outline-danger " th:href="@{'/pets/delete/'+${pet.getId()}}">Удалить</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info my-2 mr-2 my-sm-0" th:href="@{'/apptspet/'+${pet.getId()}}">Посещения</a>
                     </td>
                 </tr>
                 </tbody>

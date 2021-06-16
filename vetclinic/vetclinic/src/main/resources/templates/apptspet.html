@@ -14,12 +14,17 @@
 <div th:replace="fragments :: header" />
 
 <div class="container">
-    <div><h2>Ваши посещения:</h2></div>
+    <div>
+        <h2>Ваши посещения с питомцем:</h2>
+        <h2 th:text="${pet.getName()}"></h2>
+    </div>
     <br>
-    <table class="table table-striped">
+
+    <h3 th:if="${apptsl.isEmpty()}">Питомец не был ни на одном приеме :(</h3>
+
+    <table th:unless="${apptsl.isEmpty()}" class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Питомец</th>
             <th scope="col">Тип посещения</th>
             <th scope="col">Описание</th>
             <th scope="col">Диагноз</th>
@@ -29,7 +34,6 @@
         </thead>
         <tbody>
         <tr th:each="apptlist : ${apptsl}">
-            <td th:text="${apptlist.getPetid().getName()}"></td>
             <td th:text="${apptlist.getTypeAppt()}"></td>
             <td th:text="${apptlist.getDescription()}"></td>
             <td th:text="${apptlist.getDiagnose()}"></td>
