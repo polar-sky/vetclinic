@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Список посещений</title>
+</head>
+<body>
+<div th:replace="fragments :: header" />
+
+<div class="container">
+    <div>
+        <h2>Ваши посещения с питомцем:</h2>
+        <h2 th:text="${pet.getName()}"></h2>
+    </div>
+    <br>
+
+    <h3 th:if="${apptsl.isEmpty()}">Питомец не был ни на одном приеме :(</h3>
+
+    <table th:unless="${apptsl.isEmpty()}" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Тип посещения</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Диагноз</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Врач</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="apptlist : ${apptsl}">
+            <td th:text="${apptlist.getTypeAppt()}"></td>
+            <td th:text="${apptlist.getDescription()}"></td>
+            <td th:text="${apptlist.getDiagnose()}"></td>
+            <td th:text="${apptlist.getDate()}"></td>
+            <td th:text="${apptlist.getVetid().getFullName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
