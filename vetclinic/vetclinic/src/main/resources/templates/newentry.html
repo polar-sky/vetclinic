@@ -11,12 +11,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Записаться к врачу</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
 <body>
 <div th:replace="fragments :: header" />
 <div class="container text-center">
     <h1>Animals & CO</h1>
-    <div th:if="${entry.id == null}"><h2>Записаться к врачу</h2></div>
+    <div th:if="${entry.id == null}"><h2>Записаться к ветеринару</h2></div>
 
 </div>
 
@@ -36,25 +41,96 @@
                     </select>
                 </div>
             </div>
-            <!-- выводим список выпадающий-->
-            <div class="form-group row">
-                <label class="col-form-label col-sm-4">Дата и время:</label>
 
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Дата:</label>
                 <div class="col-sm-8">
-                    <select th:field="*{date}" class="form-control" required>
-                        <th:block th:each="entrySchedule : ${schedules}">
-                            <option  th:text="${entrySchedule.getDate()}" th:value="${entrySchedule.getDate()}"></option>
-                        </th:block>
-                    </select>
+                    <input type="text" id="data" th:field="*{date}" class="form-control" placeholder="Выберите дату">
                 </div>
             </div>
+
             <div class="text-center p-3">
                 <div th:if="${entry.id == null}">
                     <button type="submit" class="btn btn-success">Создать</button>
                 </div>
             </div>
+            <!-- выводим список выпадающий-->
+<!--            <div class="form-group row">-->
+<!--                <label class="col-form-label col-sm-4">Дата и время:</label>-->
+
+<!--                <div class="col-sm-8">-->
+<!--                    <select th:field="*{date}" class="form-control" required>-->
+<!--                        <th:block th:each="entrySchedule : ${schedules}">-->
+<!--                            <option  th:text="${entrySchedule.getDate()}" th:value="${entrySchedule.getDate()}"></option>-->
+<!--                        </th:block>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+
         </div>
     </form>
 </div>
+
+<script>
+    /* Локализация datepicker */
+    $.datepicker.regional['ru'] = {
+        closeText: 'Закрыть',
+        prevText: 'Предыдущий',
+        nextText: 'Следующий',
+        currentText: 'Сегодня',
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+        dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+        dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+        dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+        weekHeader: 'Не',
+        dateFormat: 'yy-mm-dd',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['ru']);
+</script>
+
+<script>
+    $(function(){
+        var date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        var holidays = [
+            [1,1],
+            [7,1],
+            [23,2],
+            [8,3],
+            [1,5],
+            [9,5],
+            [12,6],
+            [4,11]
+        ];
+
+        $("#data").datepicker({
+            showOn: "button",
+            buttonImage: "https://snipp.ru/demo/437/calendar.gif",
+            buttonImageOnly: true,
+            minDate: date,
+            buttonText: "Выбрать дату",
+            beforeShowDay: function(date){
+                var dayOfWeek = date.getDay();
+                for (var i = 0; i < holidays.length; i++) {
+                    if (holidays[i][0] == date.getDate() && holidays[i][1] - 1 == date.getMonth()) {
+                        return [false];
+                    }
+                }
+                if (dayOfWeek == 0 || dayOfWeek == 6){
+                    return [false];
+                } else {
+                    return [true];
+                }
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
