@@ -11,9 +11,15 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
   <title>Регистрация</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@latest/dist/js/jquery.suggestions.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/suggestions-jquery@latest/dist/css/suggestions.min.css">
 </head>
 
 <body>
+
 <div th:replace="fragments :: header" />
 
 <div class="container">
@@ -37,8 +43,8 @@
           <input type="text" id="email" th:field="*{email}" class="form-control" placeholder="Введите адрес электронной почты">
         </div>
         <div class="form-group">
-          <label for="username">Адрес</label>
-          <input type="text" id="address" th:field="*{address}" class="form-control" placeholder="Введите адрес проживания">
+          <label for="address">Адрес</label>
+          <input type="text" name="address" id="address" th:field="*{address}" class="form-control" placeholder="Введите адрес проживания" />
         </div>
         <div class="form-group">
           <label for="password">Пароль</label>
@@ -53,9 +59,22 @@
     </div>
   </div>
 </div>
+  
+<script>
+  $("#address").suggestions({
+    token: "500eb23cbc447eee8ccc0381155db31d055a7571",
+    type: "ADDRESS",
+    /* Вызывается, когда пользователь выбирает одну из подсказок */
+    onSelect: function(suggestion) {
+      console.log(suggestion);
+    }
+  });
+</script>
+  
 <footer>
   <div th:replace="footers.html :: footer"></div>
 </footer>
+  
 </body>
 <style>
   footer {
