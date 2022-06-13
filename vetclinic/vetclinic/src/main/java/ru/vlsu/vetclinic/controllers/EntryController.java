@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vlsu.vetclinic.persistence.*;
-import ru.vlsu.vetclinic.service.EntryService;
-
 import java.util.Date;
 
 import java.security.Principal;
@@ -20,45 +18,36 @@ public class EntryController {
     private UserRepository userRepo;
     private ScheduleRepository scheduleRepo;
     private PetRepository petRepo;
-    private EntryService entryService;
 
     //autowired - при создании данного класса спринг будет искать есть ли класс, реализующий интерфейс entryrepository и передаст этот класс в метод
     @Autowired
-    public EntryController(EntryRepository entryRepository, PetRepository рetRepository, VetRepository vetRepository, UserRepository userRepository, ScheduleRepository scheduleRepository, EntryService entryService){
+    public EntryController(EntryRepository entryRepository, PetRepository рetRepository, VetRepository vetRepository, UserRepository userRepository, ScheduleRepository scheduleRepository){
         this.entryRepo = entryRepository;
         this.vetRepo= vetRepository;
         this.userRepo = userRepository;
         this.scheduleRepo = scheduleRepository;
         this.petRepo = рetRepository;
-        this.entryService = entryService;
     }
 
     //*ЗАЯВКИ*
     //метод для возврата странички списка заявок
     //изменила маппинг, чтобы записи выводились на страничку /entries, а не на index
-    @GetMapping("/entriesclient")
+    @GetMapping("/entriesclient") ////////////////////////////для клиента
     public String entryPageForClient(Model model, Principal principal) {
-        model.addAttribute("entries", entryService.entriesClient(principal));
+        List<Entry> entries;
+        entries = entryRepo.findByClientidUsername(principal.getName());
+        model.addAttribute("entries", entries);
         return "entriesclient";
     }
 
-    @GetMapping("/entriesvet")
+    @GetMapping("/entriesvet") ////////////////////////////для врача
     public String entryPageForVet(Model model, Principal principal) {
-        model.addAttribute("entries", entryService.entriesVet(principal));
+        User user =userRepo.findByUsername(principal.getName()).get();
+        List<Entry> entries;
+        //Vet vet = user.getVetid();
+        entries = entryRepo.findByVetid(user.getVetid()); //здесь ошибка в представлении
+        model.addAttribute("entries", entries);
         return "entriesvet";
-    }
-
-    @PostMapping("/saveentry")
-    public String saveEntry(Entry entry, Principal principal){
-        entryService.saveEntry(entry, principal);
-        return "redirect:/entriesclient";
-
-    }
-
-    @GetMapping("/entriesclient/delete/{id}") //удалять сможет только клиент
-    public String showDeleteEntry(@PathVariable("id") Integer id){
-        entryService.deleteEntry(id);
-        return "redirect:/entriesclient";
     }
 
     @GetMapping("/vets/newentry/{id}")
@@ -75,5 +64,31 @@ public class EntryController {
         model.addAttribute("pets", pets);
         model.addAttribute("vet", vet);
         return "newentry";
+    }
+
+    @PostMapping("/saveentry")
+    public String saveEntry(Entry entry, Principal principal){
+        User user = userRepo.findByUsername(principal.getName()).get();
+        entry.setClientid(user);
+        entryRepo.save(entry);
+        //Schedule schedule = scheduleRepo.findByDateAndVetid(entry.getDate(), entry.getVetid()) ;
+        //scheduleRepo.delete(schedule);
+        return "redirect:/entriesclient";
+
+    }
+
+    @GetMapping("/entriesclient/delete/{id}") //удалять сможет только клиент
+    public String showDeleteEntry(@PathVariable("id") Integer id){
+        Entry entry = entryRepo.findById(id).get();
+        Date date = java.sql.Date.valueOf(java.time.LocalDate.now());
+        if (entry.getDate().compareTo(date)==1)      //надо создавать свободную дату только если она свежая
+        {
+            Schedule schedule = new Schedule();   //теперь восстанавливаем свободную запись, место к врачу освободилось
+            schedule.setVetid(entry.getVetid());
+            schedule.setDate(entry.getDate());
+            scheduleRepo.save(schedule);
+        }
+        entryRepo.deleteById(id);
+        return "redirect:/entriesclient";
     }
 }
